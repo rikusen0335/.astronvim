@@ -1,4 +1,5 @@
 return {
   "rmagatti/auto-session",
-  lazy = false
+  lazy = false,
+  enabled = false,
 }
