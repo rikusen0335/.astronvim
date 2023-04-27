@@ -18,8 +18,15 @@ return {
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
+    -- ["<leader>rD"] = {
+    --   function()
+    --     require('cmp').scroll_docs(10)
+    --   end,
+    -- }
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<leader>fb"] = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File browser from current path", noremap = true },
+    ["<leader>fB"] = { "<cmd>Telescope file_browser<cr>", desc = "File browser", noremap = true },
   },
   t = {
     -- setting a mapping to false will disable it
