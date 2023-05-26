@@ -1,0 +1,67 @@
+return {
+--     'junnplus/lsp-setup.nvim',
+--     dependencies = {
+--         'neovim/nvim-lspconfig',
+--         'williamboman/mason.nvim', -- optional
+--         'williamboman/mason-lspconfig.nvim', -- optional
+--     },
+--     inlay_hints = {
+--         enabled = true,
+--     },
+--     servers = {
+--         tsserver = {
+--                 settings = {
+--                     typescript = {
+--                         inlayHints = {
+--                             includeInlayParameterNameHints = 'all',
+--                             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--                             includeInlayFunctionParameterTypeHints = true,
+--                             includeInlayVariableTypeHints = true,
+--                             includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+--                             includeInlayPropertyDeclarationTypeHints = true,
+--                             includeInlayFunctionLikeReturnTypeHints = true,
+--                             includeInlayEnumMemberValueHints = true,
+--                         }
+--                     },
+--                 }
+--         },
+--     },
+--     opts = {
+--         inlay_hints = {
+--             enabled = true,
+--         },
+--         servers = {
+--             tsserver = {
+--                 settings = {
+--                     typescript = {
+--                         inlayHints = {
+--                             includeInlayParameterNameHints = 'all',
+--                             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--                             includeInlayFunctionParameterTypeHints = true,
+--                             includeInlayVariableTypeHints = true,
+--                             includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+--                             includeInlayPropertyDeclarationTypeHints = true,
+--                             includeInlayFunctionLikeReturnTypeHints = true,
+--                             includeInlayEnumMemberValueHints = true,
+--                         }
+--                     },
+--                 }
+--             },
+--             gopls = {
+--                 settings = {
+--                     gopls = {
+--                         hints = {
+--                             rangeVariableTypes = true,
+--                             parameterNames = true,
+--                             constantValues = true,
+--                             assignVariableTypes = true,
+--                             compositeLiteralFields = true,
+--                             compositeLiteralTypes = true,
+--                             functionTypeParameters = true,
+--                         },
+--                     },
+--                 },
+--             },
+--         }
+--     }
+}

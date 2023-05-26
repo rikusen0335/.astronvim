@@ -27,6 +27,13 @@ return {
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     ["<leader>fb"] = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File browser from current path", noremap = true },
     ["<leader>fB"] = { "<cmd>Telescope file_browser<cr>", desc = "File browser", noremap = true },
+    -- ["<leader>fC"] = { 
+    --   function()
+    --     require("telescope").extensions.file_browser.actions.create()
+    --   end,
+    --   desc = "Create file",
+    --   noremap = true
+    -- },
   },
   t = {
     -- setting a mapping to false will disable it
