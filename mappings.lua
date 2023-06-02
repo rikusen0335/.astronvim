@@ -28,10 +28,10 @@ local mappings = {
     ["-"] = { "<c-x>", desc = "Descrement number" },
     ["+"] = { "<c-a>", desc = "Increment number" },
     -- resize with arrows
-    ["<Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
-    ["<Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
-    ["<Left>"] = { function() require("smart-splits").resize_left(2) end, desc = "Resize split left" },
-    ["<Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
+    -- ["<Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
+    -- ["<Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
+    -- ["<Left>"] = { function() require("smart-splits").resize_left(2) end, desc = "Resize split left" },
+    -- ["<Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
     -- buffer switching
@@ -51,91 +51,91 @@ local mappings = {
     ["<leader>N"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
     ["<leader><cr>"] = { '<esc>/<++><cr>"_c4l', desc = "Next Template" },
     ["<leader>."] = { "<cmd>cd %:p:h<cr>", desc = "Set CWD" },
-    -- neogen
-    ["<leader>a"] = { desc = "󰏫 Annotate" },
-    ["<leader>a<cr>"] = { function() require("neogen").generate() end, desc = "Current" },
-    ["<leader>ac"] = { function() require("neogen").generate { type = "class" } end, desc = "Class" },
-    ["<leader>af"] = { function() require("neogen").generate { type = "func" } end, desc = "Function" },
-    ["<leader>at"] = { function() require("neogen").generate { type = "type" } end, desc = "Type" },
-    ["<leader>aF"] = { function() require("neogen").generate { type = "file" } end, desc = "File" },
+    -- -- neogen
+    -- ["<leader>a"] = { desc = "󰏫 Annotate" },
+    -- ["<leader>a<cr>"] = { function() require("neogen").generate() end, desc = "Current" },
+    -- ["<leader>ac"] = { function() require("neogen").generate { type = "class" } end, desc = "Class" },
+    -- ["<leader>af"] = { function() require("neogen").generate { type = "func" } end, desc = "Function" },
+    -- ["<leader>at"] = { function() require("neogen").generate { type = "type" } end, desc = "Type" },
+    -- ["<leader>aF"] = { function() require("neogen").generate { type = "file" } end, desc = "File" },
     -- telescope plugin mappings
     ["<leader>fB"] = { "<cmd>Telescope bibtex<cr>", desc = "Find BibTeX" },
-    ["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "File explorer" },
+    ["<leader>fe"] = { "<cmd>Telescope file_browser path=%:p:h<cr>", desc = "File explorer" },
     ["<leader>fp"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" },
     ["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
-    -- octo plugin mappings
-    ["<leader>G"] = { name = " GitHub" },
-    ["<leader>Gi"] = { "<cmd>Octo issue list<cr>", desc = "Open Issues" },
-    ["<leader>GI"] = { "<cmd>Octo issue search<cr>", desc = "Search Issues" },
-    ["<leader>Gp"] = { "<cmd>Octo pr list<cr>", desc = "Open PRs" },
-    ["<leader>GP"] = { "<cmd>Octo pr search<cr>", desc = "Search PRs" },
-    ["<leader>Gr"] = { "<cmd>Octo repo list<cr>", desc = "Open Repository" },
-    -- compiler
-    ["<leader>m"] = { desc = "󱁤 Compiler" },
-    ["<leader>mk"] = {
-      function()
-        vim.cmd "silent! write"
-        local filename = vim.fn.expand "%:t"
-        utils.async_run({ "compiler", vim.fn.expand "%:p" }, function() astro_utils.notify("Compiled " .. filename) end)
-      end,
-      desc = "Compile",
-    },
-    ["<leader>ma"] = {
-      function()
-        vim.notify "Autocompile Started"
-        utils.async_run({ "autocomp", vim.fn.expand "%:p" }, function() astro_utils.notify "Autocompile stopped" end)
-      end,
-      desc = "Auto Compile",
-    },
-    ["<leader>mv"] = {
-      function() vim.fn.jobstart { "opout", vim.fn.expand "%:p" } end,
-      desc = "View Output",
-    },
-    ["<leader>mb"] = {
-      function()
-        local filename = vim.fn.expand "%:t"
-        utils.async_run({
-          "pandoc",
-          vim.fn.expand "%",
-          "--pdf-engine=xelatex",
-          "--variable",
-          "urlcolor=blue",
-          "-t",
-          "beamer",
-          "-o",
-          vim.fn.expand "%:r" .. ".pdf",
-        }, function() astro_utils.notify("Compiled " .. filename) end)
-      end,
-      desc = "Compile Beamer",
-    },
-    ["<leader>mp"] = {
-      function()
-        local pdf_path = vim.fn.expand "%:r" .. ".pdf"
-        if vim.fn.filereadable(pdf_path) == 1 then vim.fn.jobstart { "pdfpc", pdf_path } end
-      end,
-      desc = "Present Output",
-    },
-    ["<leader>ml"] = { function() utils.toggle_qf() end, desc = "Logs" },
-    ["<leader>mt"] = { "<cmd>TexlabBuild<cr>", desc = "LaTeX" },
-    ["<leader>mf"] = { "<cmd>TexlabForward<cr>", desc = "Forward Search" },
-    ["<leader>r"] = { desc = " REPL" },
-    ["<leader>rr"] = { "<Plug>Send", desc = "Send to REPL" },
-    ["<leader>rl"] = { "<Plug>SendLine", desc = "Send line to REPL" },
-    ["<leader>r<cr>"] = { "<cmd>SendHere<cr>", desc = "Set REPL" },
-    ["<leader>z"] = { "<cmd>ZenMode<cr>", desc = "Zen Mode" },
-    ["<leader>s"] = { desc = "󰛔 Search/Replace" },
-    ["<leader>ss"] = { function() require("spectre").open() end, desc = "Spectre" },
-    ["<leader>sf"] = { function() require("spectre").open_file_search() end, desc = "Spectre (current file)" },
-    ["<leader>sw"] = {
-      function() require("spectre").open_visual { select_word = true } end,
-      desc = "Spectre (current word)",
-    },
-    ["<leader>x"] = { desc = "󰒡 Trouble" },
-    ["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-    ["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-    ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-    ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
-    ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
+    -- -- octo plugin mappings
+    -- ["<leader>G"] = { name = " GitHub" },
+    -- ["<leader>Gi"] = { "<cmd>Octo issue list<cr>", desc = "Open Issues" },
+    -- ["<leader>GI"] = { "<cmd>Octo issue search<cr>", desc = "Search Issues" },
+    -- ["<leader>Gp"] = { "<cmd>Octo pr list<cr>", desc = "Open PRs" },
+    -- ["<leader>GP"] = { "<cmd>Octo pr search<cr>", desc = "Search PRs" },
+    -- ["<leader>Gr"] = { "<cmd>Octo repo list<cr>", desc = "Open Repository" },
+    -- -- compiler
+    -- ["<leader>m"] = { desc = "󱁤 Compiler" },
+    -- ["<leader>mk"] = {
+    --   function()
+    --     vim.cmd "silent! write"
+    --     local filename = vim.fn.expand "%:t"
+    --     utils.async_run({ "compiler", vim.fn.expand "%:p" }, function() astro_utils.notify("Compiled " .. filename) end)
+    --   end,
+    --   desc = "Compile",
+    -- },
+    -- ["<leader>ma"] = {
+    --   function()
+    --     vim.notify "Autocompile Started"
+    --     utils.async_run({ "autocomp", vim.fn.expand "%:p" }, function() astro_utils.notify "Autocompile stopped" end)
+    --   end,
+    --   desc = "Auto Compile",
+    -- },
+    -- ["<leader>mv"] = {
+    --   function() vim.fn.jobstart { "opout", vim.fn.expand "%:p" } end,
+    --   desc = "View Output",
+    -- },
+    -- ["<leader>mb"] = {
+    --   function()
+    --     local filename = vim.fn.expand "%:t"
+    --     utils.async_run({
+    --       "pandoc",
+    --       vim.fn.expand "%",
+    --       "--pdf-engine=xelatex",
+    --       "--variable",
+    --       "urlcolor=blue",
+    --       "-t",
+    --       "beamer",
+    --       "-o",
+    --       vim.fn.expand "%:r" .. ".pdf",
+    --     }, function() astro_utils.notify("Compiled " .. filename) end)
+    --   end,
+    --   desc = "Compile Beamer",
+    -- },
+    -- ["<leader>mp"] = {
+    --   function()
+    --     local pdf_path = vim.fn.expand "%:r" .. ".pdf"
+    --     if vim.fn.filereadable(pdf_path) == 1 then vim.fn.jobstart { "pdfpc", pdf_path } end
+    --   end,
+    --   desc = "Present Output",
+    -- },
+    -- ["<leader>ml"] = { function() utils.toggle_qf() end, desc = "Logs" },
+    -- ["<leader>mt"] = { "<cmd>TexlabBuild<cr>", desc = "LaTeX" },
+    -- ["<leader>mf"] = { "<cmd>TexlabForward<cr>", desc = "Forward Search" },
+    -- ["<leader>r"] = { desc = " REPL" },
+    -- ["<leader>rr"] = { "<Plug>Send", desc = "Send to REPL" },
+    -- ["<leader>rl"] = { "<Plug>SendLine", desc = "Send line to REPL" },
+    -- ["<leader>r<cr>"] = { "<cmd>SendHere<cr>", desc = "Set REPL" },
+    -- ["<leader>z"] = { "<cmd>ZenMode<cr>", desc = "Zen Mode" },
+    -- ["<leader>s"] = { desc = "󰛔 Search/Replace" },
+    -- ["<leader>ss"] = { function() require("spectre").open() end, desc = "Spectre" },
+    -- ["<leader>sf"] = { function() require("spectre").open_file_search() end, desc = "Spectre (current file)" },
+    -- ["<leader>sw"] = {
+    --   function() require("spectre").open_visual { select_word = true } end,
+    --   desc = "Spectre (current word)",
+    -- },
+    -- ["<leader>x"] = { desc = "󰒡 Trouble" },
+    -- ["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+    -- ["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    -- ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+    -- ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+    -- ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
     ["<leader>;"] = { desc = "󰧑 AI Assistant" },
     ["<leader>;;"] = {
       function()

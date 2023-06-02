@@ -29,6 +29,25 @@ return {
     opts = function() return { server = require("astronvim.utils.lsp").config "tsserver" } end,
   },
   {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    init = function() table.insert(astronvim.lsp.skip_setup, "gopls") end,
+    config = function() require("go").setup() end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+    opts = function()
+      return {
+        server = require("astronvim.utils.lsp").config "gopls",
+        extensions = { lsp_inlay_hints = { enable = false } },
+      }
+    end,
+  },
+  {
     "p00f/clangd_extensions.nvim",
     init = function() table.insert(astronvim.lsp.skip_setup, "clangd") end,
     ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },

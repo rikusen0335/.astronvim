@@ -4,6 +4,14 @@ return {
     "nvim-telescope/telescope-hop.nvim",
     "nvim-telescope/telescope-bibtex.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    {
+      "nvim-telescope/telescope-frecency.nvim",
+      dependencies = {
+        "kkharji/sqlite.lua",
+      },
+      config = function() require("telescope").load_extension "frecency" end,
+    },
     "ahmedkhalf/project.nvim", -- defined in  ./editor.lua
   },
   opts = function(_, opts)
@@ -47,6 +55,7 @@ return {
       extensions = {
         bibtex = { context = true, context_fallback = false },
         file_browser = {
+          theme = "ivy",
           mappings = {
             i = {
               ["<C-z>"] = fb_actions.toggle_hidden,
@@ -77,5 +86,7 @@ return {
     telescope.load_extension "bibtex"
     telescope.load_extension "file_browser"
     telescope.load_extension "projects"
+    telescope.load_extension "ui-select"
+    telescope.load_extension "frecency"
   end,
 }
